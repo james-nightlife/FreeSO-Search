@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title -->
+        <title>{% block title %}{% endblock %}</title>
+        <!-- UTF-8 Display -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <!-- Mobile First -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- jQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Plotly Graph -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <!-- The Sims Sans Font -->
+        <link href="http://fonts.cdnfonts.com/css/the-sims-sans" rel="stylesheet">     
+        <!-- FontAwesome Icon -->
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+        <style>
+            body{
+                font-family: 'The Sims Sans', sans-serif;
+            }
+            #box{
+                background: rgba(255, 255, 255, 0.5);
+            }
+            #error{
+                background: rgb(253, 33, 33);
+                font-size: 20pt;
+            }
+            {% block style %}           
+            {% endblock %}
+        </style>
+    </head>
+    <body>
+        {% include 'includes/header.html'%}
+        {% block body %}{% endblock %}
+        {% include 'includes/footer.html' %}
+    </body>
+    {% block scriptend %}{% endblock %}
+</html>

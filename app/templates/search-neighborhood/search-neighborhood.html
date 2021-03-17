@@ -1,0 +1,57 @@
+{% extends 'base_layout.html' %}
+{% block title %}Search Neighborhood - FreeSo Search{% endblock %}
+{% block style %}
+    body{
+        background-position: center;
+        background-image: url('{{url_for("static", filename="bg.png")}}');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+{% endblock %}
+{% block body %}
+    <div class="border mx-5 my-5 px-5 py-3" id='box'>
+        <form method="GET">
+            <div class="form-group">
+                <label for="searchfield"></label>
+                <input name="searchfield" id="searchfield" class="form-control" placeholder="Please enter neighborhood name here.">
+            </div>
+            <button type="submit" class="form-control btn btn-success">Search</button>
+        </form>
+    </div>
+    {% if data %}
+        <div class="border mx-5 mb-5 px-5 py-3" id='box'>
+            <h6>Name :</h6>{{data['name']}}<br><br>
+            <h6>Mayor :</h6>{{data['mayor_id']}} (Since {{data['mayor_elected_date']}})<br><br>
+            <h6>Description :</h6>
+            {% for i in data['description'] %}
+                {{i}}<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if error %}
+    <div class="border mx-5 my-5 px-5 py-5 text-center text-light" id='error'>
+        <i class="fas fa-times-circle fa-10x"></i><br>Neighborhood Not Found
+    </div>
+    {% endif %}
+    {% if not data and not error %}
+        <div class="border mx-5 mb-5 px-5 py-5" id='box'>
+            {% for id in ids %}
+                <div id='{{id}}'></div>
+            {% endfor %}
+        </div>   
+    {% endif %}
+{% endblock %}
+{% block scriptend %}
+    <script type="text/javascript">
+        {% if not data %}
+            var graphs = {{ graphJSON | safe}};
+            var ids = {{ ids | safe}};
+            for (var i in graphs) {
+            Plotly.plot(ids[i], // the ID of the div, created above
+            graphs[i].data,
+            graphs[i].layout || {} , {responsive: true});
+            }
+        {% endif %}
+        document.getElementById("neighborhood").className = "nav-link active";
+    </script> 
+{% endblock %}

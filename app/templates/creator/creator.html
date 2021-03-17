@@ -1,0 +1,28 @@
+{% extends 'base_layout.html' %}
+{% block title %}Creator - FreeSo Search{% endblock %}
+{% block style %}
+    body{
+        background-color: rgb(160, 237, 255);
+    }       
+    #name{
+        background: linear-gradient(rgb(63,172,237) , rgb(145,245,97));
+    }
+{% endblock %}
+{% block body %}
+    <div class="container my-5 py-5">
+        <div class="row">
+            {% for i in creator %}
+                <div class="col-sm border text-center" id='name'>
+                    <img src='{{i[3]}}' width="100%">
+                    <h1>{{i[1]}}<br>{{i[2]}}</h1>
+                    <h3>{{i[0]}}</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block scriptend %}
+    <script type="text/javascript">
+        document.getElementById("creator").className = "nav-link active";
+    </script>
+{% endblock %}
